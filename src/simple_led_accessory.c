@@ -19,7 +19,7 @@
 #define ACCESSORY_SN  ("SN_0123456")  //SERIAL_NUMBER
 #define ACCESSORY_MANUFACTURER ("Arduino Homekit")
 #define ACCESSORY_MODEL  ("ESP8266")
-
+#define PWMRANGENEWNEW 1023 // Fixed in newest ESP LIB Update
 #define PIN_LED  2//D4
 
 int led_bri = 100; //[0, 100]
@@ -64,10 +64,10 @@ void occupancy_toggle() {
 
 void led_update() {
 	if (led_power) {
-		float PWMRANGE = 255;
-		int pwm = PWMRANGE - (int) (led_bri * 1.0 * PWMRANGE / 100.0 + 0.5f);
+		float PWMRANGENEW = 255;
+		int pwm = PWMRANGENEW - (int) (led_bri * 1.0 * PWMRANGENEW / 100.0 + 0.5f);
 		analogWrite(PIN_LED, pwm);
-		printf("ON  %3d (pwm: %4d of %d)\n", led_bri, pwm, PWMRANGE);
+		printf("ON  %3d (pwm: %4d of %d)\n", led_bri, pwm, PWMRANGENEW);
 	} else {
 		printf("OFF\n");
 		digitalWrite(PIN_LED, HIGH);
